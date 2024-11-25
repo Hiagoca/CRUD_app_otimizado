@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/_theme.css">
+    <title>Cadastro de Trecos</title>
+</head>
+
+<body>
+    <div id="wrap">
+        <header>
+            <h1>Cadastro de Trecos</h1>
+        </header>
+
+        {% if user %}
+
+        <nav>
+            <button onclick="location.href='/'">Listar</button>
+            <button onclick="location.href='/new'">Novo</button>
+            <span><a href="/profile">Olá {{ user.fname }}!</a></span>
+        </nav>
+
+        {% endif %}
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer><span>&copy;</span> Copyleft 2024 Joca da Silva</footer>
+    </div>
+
+    <script>
+        // Evita o reenvio dos formulários ao atualizar a página
+        if (window.history.replaceState) window.history.replaceState(null, null, window.location.href);
+    </script>
+
+</body>
+
+</html>

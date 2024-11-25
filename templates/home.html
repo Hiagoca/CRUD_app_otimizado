@@ -1,0 +1,52 @@
+{% extends '_theme.html' %}
+
+{% block content %}
+
+<h2>Sua Lista de Trecos</h2>
+
+{% if delete %}
+
+<dialog id="myDialog">
+    <h4>Legal!</h4>
+    <p>Seu treco foi apagado!</p>
+    <form method="dialog">
+        <button>OK</button>
+    </form>
+</dialog>
+<script>myDialog.showModal()</script>
+
+{% endif %}
+
+{% if edit %}
+
+<dialog id="myDialog">
+    <h4>Legal!</h4>
+    <p>Seu treco foi editado!</p>
+    <form method="dialog">
+        <button>OK</button>
+    </form>
+</dialog>
+<script>myDialog.showModal()</script>
+
+{% endif %}
+
+<div class="list">
+
+    {% for thing in things %}
+
+    <div class="item">
+        <img src="{{ thing.t_photo }}" alt="{{ thing.t_name }}">
+        <div>
+            <h4>{{ thing.t_name }}</h4>
+            <button onclick="location.href='/view/{{ thing.t_id }}'">Ver</button>
+            <button onclick="location.href='/edit/{{ thing.t_id }}'">Editar</button>
+            <button
+                onclick="if(confirm('Tem certeza?')) location.href='/delete/{{ thing.t_id }}'; return false">Apagar</button>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

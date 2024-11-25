@@ -1,0 +1,40 @@
+{% extends '_theme.html' %}
+
+{% block content %}
+
+<h2>Logue-se</h2>
+<p>Você precisa se logar para operar sua coleção.</p>
+
+{% if error %}
+
+<dialog id="myDialog">
+    <h4>Oooops!</h4>
+    <p>Usuário e/ou senha inválido.</p>
+    <form method="dialog">
+        <button>OK</button>
+    </form>
+</dialog>
+<script>myDialog.showModal()</script>
+
+{% endif %}
+
+<form action="/login" method="post" id="login">
+
+    <p>
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" id="email" required>
+    </p>
+    <p>
+        <label for="password">Senha:</label>
+        <input type="password" name="password" id="password" required minlength="5" maxlength="25">
+    </p>
+    <p>
+        <button type="submit">Entrar</button>
+    </p>
+
+</form>
+
+<p class="center"><a href="/newuser">Cadastre-se aqui!</a></p>
+<p class="center"><a href="/sendpass">Esqueceu a senha?</a></p>
+
+{% endblock %}
