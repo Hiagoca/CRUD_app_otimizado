@@ -1,0 +1,58 @@
+{# Inclui o template principal nesta página #}
+{% extends '_template.html' %}
+
+{# Bloco com conteúdo desta página, que será renderizado no template principal #}
+{% block conteudo %}
+
+<h2>Lista de Trecos</h2>
+
+<div class="lista">
+
+    {% for item in items %}
+
+    <div class="item">
+        <a href="{{ item.t_foto }}" target="_blank"><img src="{{ item.t_foto }}" alt="{{ item.t_nome }}"></a>
+        <div>
+            <a class="flutua-icone" href="/apaga/{{ item.t_id }}" title="Apagar {{ item.t_nome }}." onclick="return confirm('Term certeza que deseja apagar este item?')">
+                <i class="fa-regular fa-trash-can fa-fw"></i>
+            </a>
+            <a class="flutua-icone" href="/edita/{{ item.t_id }}" title="Editar {{ item.t_nome }}.">
+                <i class="fa-solid fa-pen-to-square fa-fw"></i>
+            </a>
+            <h4>{{ item.t_nome }}</h4>
+            {{ item.t_descricao }}
+            <small>Local: {{ item.t_localizacao }}</small>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% if acao == 'apagado' %}
+
+<dialog id="myDialog">
+    <h4>Oba!</h4>
+    <p>Seu treco foi apagado com sucesso!</p>
+    <form method="dialog">
+        <button onclick="window.history.pushState({}, '', '/')">OK</button>
+    </form>
+</dialog>
+<script>myDialog.showModal()</script>
+
+{% endif %}
+
+{% if acao == 'editado' %}
+
+<dialog id="myDialog">
+    <h4>Oba!</h4>
+    <p>Seu treco foi editado com sucesso!</p>
+    <form method="dialog">
+        <button onclick="window.history.pushState({}, '', '/')">OK</button>
+    </form>
+</dialog>
+<script>myDialog.showModal()</script>
+
+{% endif %}
+
+{% endblock %}

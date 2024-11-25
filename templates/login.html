@@ -1,40 +1,44 @@
-{% extends '_theme.html' %}
+{% extends '_template.html' %}
 
-{% block content %}
+{% block conteudo %}
 
-<h2>Logue-se</h2>
-<p>Você precisa se logar para operar sua coleção.</p>
+<h2>Login no Site</h2>
 
-{% if error %}
+<p>Logue-se para gerenciar sua coleção.</p>
 
-<dialog id="myDialog">
-    <h4>Oooops!</h4>
-    <p>Usuário e/ou senha inválido.</p>
-    <form method="dialog">
-        <button>OK</button>
-    </form>
-</dialog>
-<script>myDialog.showModal()</script>
-
-{% endif %}
-
-<form action="/login" method="post" id="login">
+<form action="/login" method="post" id="formLogin">
 
     <p>
         <label for="email">E-mail:</label>
         <input type="email" name="email" id="email" required>
     </p>
+
     <p>
-        <label for="password">Senha:</label>
-        <input type="password" name="password" id="password" required minlength="5" maxlength="25">
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" id="senha" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
     </p>
+
     <p>
         <button type="submit">Entrar</button>
     </p>
 
 </form>
+<hr>
+<ul>
+    <li>Não é cadastrado? <a href="/cadastro">Clique aqui!</a></li>
+    <li>Esqueceu a senha? <a href="/novasenha">Clique aqui!</a></li>
+</ul>
 
-<p class="center"><a href="/newuser">Cadastre-se aqui!</a></p>
-<p class="center"><a href="/sendpass">Esqueceu a senha?</a></p>
+
+{% if erro %}
+
+<dialog id="myDialog">
+    <h4>Oooops!</h4>
+    <p>Não encontrei seus dados! Verifique o e-mail e a senha e tente novamente.</p>
+    <form method="dialog"><button>OK</button></form>
+</dialog>
+<script>myDialog.showModal()</script>
+
+{% endif %}
 
 {% endblock %}
